@@ -9,6 +9,10 @@ const exampleMenuList = [
     href: '/example/market-code',
     text: '마켓 코드 목록',
   },
+  {
+    href: '/example/candles-minutes',
+    text: '분봉 데이터 목록',
+  },
 ];
 
 const Header = () => (
@@ -21,11 +25,11 @@ const Header = () => (
     <div className="flex-none">
       <Menu horizontal className="px-1">
         <Menu.Item>
-          <Link href="/">Exchange</Link>
+          <Link href="/">거래소</Link>
         </Menu.Item>
-        <Menu.Item className="w-[140px]">
+        <Menu.Item className="w-[145px]">
           <details>
-            <summary>Example</summary>
+            <summary>API 예제</summary>
             <ul className="p-2 bg-slate-800">
               {exampleMenuList.map((item, idx) => (
                 <li key={`example-menu-${idx}`}>

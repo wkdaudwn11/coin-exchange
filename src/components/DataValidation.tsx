@@ -13,7 +13,7 @@ type Props = {
   isEmpty?: boolean;
   isLoading: boolean;
   refetch?: () => void;
-  title: string;
+  title?: string;
 };
 
 const DataValidation = ({
@@ -40,7 +40,7 @@ const DataValidation = ({
 
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-4xl font-semibold">{title}</p>
+      {title && <p className="text-4xl font-semibold">{title}</p>}
       {children}
     </div>
   );

@@ -55,9 +55,9 @@ const MarketCodePage = () => {
             ) : (
               <Table.Head className="sticky top-0 z-10 bg-slate-900">
                 <span />
-                <span>EN</span>
-                <span>KR</span>
-                <span>Market Code</span>
+                <span>영문 이름</span>
+                <span>한글 이름</span>
+                <span>마켓 코드</span>
               </Table.Head>
             )}
             <Table.Body>
