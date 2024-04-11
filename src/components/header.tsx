@@ -7,7 +7,7 @@ import { Button, Menu, Navbar } from 'react-daisyui';
 const exampleMenuList = [
   {
     href: '/example/market-code',
-    text: 'Market code',
+    text: '마켓 코드 목록',
   },
 ];
 

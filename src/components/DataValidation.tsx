@@ -13,6 +13,7 @@ type Props = {
   isEmpty?: boolean;
   isLoading: boolean;
   refetch?: () => void;
+  title: string;
 };
 
 const DataValidation = ({
@@ -21,6 +22,7 @@ const DataValidation = ({
   refetch,
   isEmpty,
   emptyMessage,
+  title,
   children,
 }: Props) => {
   if (isLoading) return <Loading />;
@@ -36,7 +38,12 @@ const DataValidation = ({
 
   if (isEmpty) return <EmptyBox message={emptyMessage} refetch={refetch} />;
 
-  return children;
+  return (
+    <div className="flex flex-col gap-4">
+      <p className="text-4xl font-semibold">{title}</p>
+      {children}
+    </div>
+  );
 };
 
 export default DataValidation;
