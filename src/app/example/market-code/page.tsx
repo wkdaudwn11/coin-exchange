@@ -30,7 +30,7 @@ const MarketCodePage = () => {
         refetch={refetch}
         isEmpty={!isLoading && !error && (!data || (data && data.length === 0))}
         emptyMessage="마켓코드 데이터가 없습니다."
-        title="마켓코드 목록"
+        title="종목 - 마켓코드 목록"
       >
         <div className="flex flex-col gap-4">
           <Form className="shadow bg-base-200 w-36 rounded-lg px-2">

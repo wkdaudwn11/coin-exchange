@@ -7,11 +7,15 @@ import { Button, Menu, Navbar } from 'react-daisyui';
 const exampleMenuList = [
   {
     href: '/example/market-code',
-    text: '마켓 코드 목록',
+    text: '종목 - 마켓 코드 목록',
   },
   {
     href: '/example/candles-minutes',
-    text: '분봉 데이터 목록',
+    text: '캔들 - 분봉 데이터 목록',
+  },
+  {
+    href: '/example/candles-days',
+    text: '캔들 - 일봉 데이터 목록',
   },
 ];
 
@@ -27,10 +31,10 @@ const Header = () => (
         <Menu.Item>
           <Link href="/">거래소</Link>
         </Menu.Item>
-        <Menu.Item className="w-[145px]">
+        <Menu.Item>
           <details>
-            <summary>API 예제</summary>
-            <ul className="p-2 bg-slate-800">
+            <summary>Rest API 예제</summary>
+            <ul className="p-2 bg-slate-800 w-[180px] right-0">
               {exampleMenuList.map((item, idx) => (
                 <li key={`example-menu-${idx}`}>
                   <Link href={item.href}>{item.text}</Link>
