@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import type { GetCandlesMinutesRequest } from '@/types/candles-minutes';
+import type { GetCandlesRequest } from '@/types/candles';
 
 import { getMarketCode } from '@/services/market-code';
 
@@ -16,7 +16,7 @@ const unitList = ['1', '3', '5', '10', '15', '30', '60', '240'];
 const countList = ['1', '5', '10', '30', '50', '100', '200'];
 
 const CandlesMinutesPage = () => {
-  const [payload, setPayload] = useState<GetCandlesMinutesRequest>({
+  const [payload, setPayload] = useState<GetCandlesRequest>({
     count: countList[2],
     unit: unitList[2],
     market: '',

@@ -1,4 +1,4 @@
-export type GetCandlesMinutesRequest = {
+export type GetCandlesRequest = {
   count: string;
   market: string;
   unit: string;

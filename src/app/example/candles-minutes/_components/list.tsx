@@ -1,16 +1,16 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Table } from 'react-daisyui';
 import { format } from 'date-fns';
 
-import type { GetCandlesMinutesRequest } from '@/types/candles-minutes';
+import type { GetCandlesRequest } from '@/types/candles';
 
-import { getCandlesMinutes } from '@/services/candles-minutes';
+import { getCandlesMinutes } from '@/services/candles';
 
 import DataValidation from '@/components/DataValidation';
+import Table from '@/components/Table';
 
 type Props = {
-  payload: GetCandlesMinutesRequest;
+  payload: GetCandlesRequest;
 };
 
 const List = ({ payload }: Props) => {
@@ -28,8 +28,8 @@ const List = ({ payload }: Props) => {
         isEmpty={!isLoading && !error && (!data || (data && data.length === 0))}
         emptyMessage="분동 데이터가 없습니다."
       >
-        <Table>
-          <Table.Head className="sticky top-0 z-10 bg-slate-900">
+        <Table.Container>
+          <Table.Head>
             <span />
             <span>시간</span>
             <span>시가</span>
@@ -41,7 +41,7 @@ const List = ({ payload }: Props) => {
           </Table.Head>
           <Table.Body>
             {data?.map((item, idx) => (
-              <Table.Row hover key={`candles-minutes-${idx}`}>
+              <Table.Row key={`candles-minutes-${idx}`}>
                 <span>{data.length - idx}</span>
                 <span>
                   {format(item.candle_date_time_kst, 'yyyy-MM-dd HH:mm:ss')}
@@ -59,7 +59,7 @@ const List = ({ payload }: Props) => {
               </Table.Row>
             ))}
           </Table.Body>
-        </Table>
+        </Table.Container>
       </DataValidation>
     </div>
   );

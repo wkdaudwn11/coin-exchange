@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Checkbox, Form, Table } from 'react-daisyui';
+import { Checkbox, Form } from 'react-daisyui';
 
 import { getMarketCode } from '@/services/market-code';
 
 import Layout from '@/components/layout';
 import DataValidation from '@/components/DataValidation';
+import Table from '@/components/Table';
 
 const MarketCodePage = () => {
   const [isDetails, setIsDetails] = useState(false);
@@ -38,9 +39,9 @@ const MarketCodePage = () => {
             </Form.Label>
           </Form>
 
-          <Table>
+          <Table.Container>
             {isDetails ? (
-              <Table.Head className="sticky top-0 z-10 bg-slate-900">
+              <Table.Head>
                 <span />
                 <span>영문 이름</span>
                 <span>한글 이름</span>
@@ -53,7 +54,7 @@ const MarketCodePage = () => {
                 <span>소수 계정 집중</span>
               </Table.Head>
             ) : (
-              <Table.Head className="sticky top-0 z-10 bg-slate-900">
+              <Table.Head>
                 <span />
                 <span>영문 이름</span>
                 <span>한글 이름</span>
@@ -63,7 +64,7 @@ const MarketCodePage = () => {
             <Table.Body>
               {data?.map((item, idx) =>
                 item.market_event ? (
-                  <Table.Row hover key={`market-code-${idx}`}>
+                  <Table.Row key={`market-code-${idx}`}>
                     <span>{data.length - idx}</span>
                     <span>{item.english_name}</span>
                     <span>{item.korean_name}</span>
@@ -115,7 +116,7 @@ const MarketCodePage = () => {
                     </span>
                   </Table.Row>
                 ) : (
-                  <Table.Row hover key={`market-code-${idx}`}>
+                  <Table.Row key={`market-code-${idx}`}>
                     <span>{data.length - idx}</span>
                     <span>{item.english_name}</span>
                     <span>{item.korean_name}</span>
@@ -124,7 +125,7 @@ const MarketCodePage = () => {
                 ),
               )}
             </Table.Body>
-          </Table>
+          </Table.Container>
         </div>
       </DataValidation>
     </Layout>
