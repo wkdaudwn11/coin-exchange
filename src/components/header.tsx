@@ -17,6 +17,10 @@ const exampleMenuList = [
     href: '/example/candles-days',
     text: '캔들 - 일봉 데이터 목록',
   },
+  {
+    href: '/example/candles-weeks',
+    text: '캔들 - 주봉 데이터 목록',
+  },
 ];
 
 const Header = () => (

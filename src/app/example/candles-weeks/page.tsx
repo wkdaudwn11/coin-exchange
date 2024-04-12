@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { Input } from 'react-daisyui';
+import { format } from 'date-fns';
 
-import type { GetCandlesRequest } from '@/types/candles';
+import type { GetCandlesWeeksMonthsRequest } from '@/types/candles';
 
 import { getMarketCode } from '@/services/market-code';
 
@@ -12,18 +14,18 @@ import DataValidation from '@/components/DataValidation';
 
 import List from './_components/list';
 
-const unitList = ['1', '3', '5', '10', '15', '30', '60', '240'];
 const countList = ['1', '5', '10', '30', '50', '100', '200'];
 
-const CandlesMinutesPage = () => {
-  const [payload, setPayload] = useState<GetCandlesRequest>({
+const CandlesWeeksPage = () => {
+  const [payload, setPayload] = useState<GetCandlesWeeksMonthsRequest>({
     count: countList[2],
-    unit: unitList[2],
     market: '',
+    to: format(new Date(), 'yyyy-MM-dd'),
+    unit: 'weeks',
   });
 
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ['candles-minutes-market-code'],
+    queryKey: ['candles-weeks-market-code'],
     queryFn: () => getMarketCode({ isDetails: false }),
   });
 
@@ -33,6 +35,15 @@ const CandlesMinutesPage = () => {
     setPayload({
       ...payload,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target) return;
+
+    setPayload({
+      ...payload,
+      to: e.target.value,
     });
   };
 
@@ -52,9 +63,9 @@ const CandlesMinutesPage = () => {
         error={error}
         refetch={refetch}
         isEmpty={!isLoading && !error && (!data || (data && data.length === 0))}
-        emptyMessage="분봉 데이터가 없습니다."
-        title="캔들 - 분봉 데이터 목록"
-        desc="* 분봉은 매일 오전 9시 정각에 초기화"
+        emptyMessage="주봉 데이터가 없습니다."
+        title="캔들 - 주봉 데이터 목록"
+        desc="* 주봉은 매일 오전 9시 정각에 초기화"
       >
         <div className="flex flex-col gap-4">
           <div className="flex items-end gap-4">
@@ -78,24 +89,6 @@ const CandlesMinutesPage = () => {
 
             <div className="form-control w-full max-w-xs">
               <label className="label">
-                <span className="label-text">분 선택</span>
-              </label>
-              <select
-                className="select w-full max-w-xs"
-                name="unit"
-                value={payload.unit}
-                onChange={handleChange}
-              >
-                {unitList?.map((item) => (
-                  <option key={`minute-${item}`} value={item}>
-                    {item} 분
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="form-control w-full max-w-xs">
-              <label className="label">
                 <span className="label-text">개수 선택</span>
               </label>
               <select
@@ -111,6 +104,17 @@ const CandlesMinutesPage = () => {
                 ))}
               </select>
             </div>
+
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">날짜 선택</span>
+              </label>
+              <Input
+                type="date"
+                value={payload.to}
+                onChange={handleDateChange}
+              />
+            </div>
           </div>
         </div>
 
@@ -120,4 +124,4 @@ const CandlesMinutesPage = () => {
   );
 };
 
-export default CandlesMinutesPage;
+export default CandlesWeeksPage;

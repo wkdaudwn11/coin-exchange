@@ -10,7 +10,7 @@ const Container = ({ children }: Props) => (
 );
 
 const Head = ({ children }: Props) => (
-  <DaisyUiTable.Head className="sticky top-0 z-10 bg-slate-900">
+  <DaisyUiTable.Head className="sticky top-0 z-10 bg-slate-900 text-center">
     {children}
   </DaisyUiTable.Head>
 );
@@ -21,7 +21,9 @@ const Body = ({ children }: Props) => (
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Row = ({ children }: any) => (
-  <DaisyUiTable.Row hover>{children}</DaisyUiTable.Row>
+  <DaisyUiTable.Row hover className="text-right">
+    {children}
+  </DaisyUiTable.Row>
 );
 
 const Table = {

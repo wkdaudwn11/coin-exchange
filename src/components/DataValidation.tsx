@@ -8,6 +8,7 @@ import EmptyBox from './EmptyBox';
 
 type Props = {
   children: React.ReactNode;
+  desc?: string;
   emptyMessage?: string;
   error: Error | null;
   isEmpty?: boolean;
@@ -23,6 +24,7 @@ const DataValidation = ({
   isEmpty,
   emptyMessage,
   title,
+  desc,
   children,
 }: Props) => {
   if (isLoading) return <Loading />;
@@ -41,6 +43,7 @@ const DataValidation = ({
   return (
     <div className="flex flex-col gap-4">
       {title && <p className="text-4xl font-semibold">{title}</p>}
+      {desc && <p className="text-lime-500">{desc}</p>}
       {children}
     </div>
   );

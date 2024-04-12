@@ -16,7 +16,7 @@ import List from './_components/list';
 
 const countList = ['1', '5', '10', '30', '50', '100', '200'];
 
-const CandlesMinutesPage = () => {
+const CandlesDaysPage = () => {
   const [payload, setPayload] = useState<GetCandlesDaysRequest>({
     count: countList[2],
     market: '',
@@ -63,8 +63,9 @@ const CandlesMinutesPage = () => {
         error={error}
         refetch={refetch}
         isEmpty={!isLoading && !error && (!data || (data && data.length === 0))}
-        emptyMessage="분봉 데이터가 없습니다."
+        emptyMessage="일봉 데이터가 없습니다."
         title="캔들 - 일봉 데이터 목록"
+        desc="* 일봉은 매일 오전 9시 정각에 초기화"
       >
         <div className="flex flex-col gap-4">
           <div className="flex items-end gap-4">
@@ -123,4 +124,4 @@ const CandlesMinutesPage = () => {
   );
 };
 
-export default CandlesMinutesPage;
+export default CandlesDaysPage;

@@ -26,7 +26,7 @@ const List = ({ payload }: Props) => {
         error={error}
         refetch={refetch}
         isEmpty={!isLoading && !error && (!data || (data && data.length === 0))}
-        emptyMessage="분동 데이터가 없습니다."
+        emptyMessage="일봉 데이터가 없습니다."
       >
         <Table.Container>
           <Table.Head>
@@ -44,7 +44,7 @@ const List = ({ payload }: Props) => {
           </Table.Head>
           <Table.Body>
             {data?.map((item, idx) => (
-              <Table.Row key={`candles-minutes-${idx}`}>
+              <Table.Row key={`candles-days-${idx}`}>
                 <span>{data.length - idx}</span>
                 <span>{format(item.candle_date_time_kst, 'yyyy-MM-dd')}</span>
                 <span>{item.opening_price.toLocaleString()}</span>
