@@ -15,7 +15,7 @@ type Props = {
 
 const List = ({ payload }: Props) => {
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ['candles-weeks', payload],
+    queryKey: ['candles-months', payload],
     queryFn: () => getCandlesWeeksMonths({ ...payload }),
   });
 
@@ -26,7 +26,7 @@ const List = ({ payload }: Props) => {
         error={error}
         refetch={refetch}
         isEmpty={!isLoading && !error && (!data || (data && data.length === 0))}
-        emptyMessage="주봉 데이터가 없습니다."
+        emptyMessage="월봉 데이터가 없습니다."
       >
         <Table.Container>
           <Table.Head>
@@ -41,9 +41,9 @@ const List = ({ payload }: Props) => {
           </Table.Head>
           <Table.Body>
             {data?.map((item, idx) => (
-              <Table.Row key={`candles-weeks-${idx}`}>
+              <Table.Row key={`candles-months-${idx}`}>
                 <span>{data.length - idx}</span>
-                <span>{format(item.candle_date_time_kst, 'yyyy-MM-dd')}</span>
+                <span>{format(item.candle_date_time_kst, 'yyyy-MM')}</span>
                 <span>{item.opening_price.toLocaleString()}</span>
                 <span>{item.high_price.toLocaleString()}</span>
                 <span>{item.low_price.toLocaleString()}</span>
