@@ -6,24 +6,28 @@ import { Button, Menu, Navbar } from 'react-daisyui';
 
 const exampleMenuList = [
   {
-    href: '/example/market-code',
+    href: '/example/rest-api/market-code',
     text: '종목 - 마켓 코드 목록',
   },
   {
-    href: '/example/candles-minutes',
+    href: '/example/rest-api/candles-minutes',
     text: '캔들 - 분봉 데이터 목록',
   },
   {
-    href: '/example/candles-days',
+    href: '/example/rest-api/candles-days',
     text: '캔들 - 일봉 데이터 목록',
   },
   {
-    href: '/example/candles-weeks',
+    href: '/example/rest-api/candles-weeks',
     text: '캔들 - 주봉 데이터 목록',
   },
   {
-    href: '/example/candles-months',
+    href: '/example/rest-api/candles-months',
     text: '캔들 - 월봉 데이터 목록',
+  },
+  {
+    href: '/example/rest-api/trades-ticks',
+    text: '체결 - 최근 체결 내역',
   },
 ];
 
