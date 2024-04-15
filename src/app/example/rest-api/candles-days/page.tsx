@@ -9,8 +9,9 @@ import type { GetCandlesDaysRequest } from '@/types/candles';
 
 import { getMarketCode } from '@/services/market-code';
 
-import Layout from '@/components/layout';
+import DropdownMarketCode from '@/components/dropdown-market-code';
 import DataValidation from '@/components/DataValidation';
+import Layout from '@/components/layout';
 
 import List from './_components/list';
 
@@ -69,23 +70,11 @@ const CandlesDaysPage = () => {
       >
         <div className="flex flex-col gap-4">
           <div className="flex items-end gap-4">
-            <div className="form-control w-full max-w-xs">
-              <label className="label">
-                <span className="label-text">코인 선택</span>
-              </label>
-              <select
-                className="select w-full max-w-xs"
-                name="market"
-                value={payload.market}
-                onChange={handleChange}
-              >
-                {data?.map((item) => (
-                  <option key={item.market} value={item.market}>
-                    {item.korean_name} / {item.english_name}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <DropdownMarketCode
+              activeValue={payload.market}
+              optionList={data}
+              handleChange={handleChange}
+            />
 
             <div className="form-control w-full max-w-xs">
               <label className="label">
