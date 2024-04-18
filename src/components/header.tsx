@@ -29,6 +29,10 @@ const exampleMenuList = [
     href: '/example/rest-api/trades-ticks',
     text: '체결 - 최근 체결 내역',
   },
+  {
+    href: '/example/rest-api/orderbook',
+    text: '호가 - 정보 조회',
+  },
 ];
 
 const Header = () => (
