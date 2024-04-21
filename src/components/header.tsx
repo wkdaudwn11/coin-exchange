@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Button, Menu, Navbar } from 'react-daisyui';
 
-const exampleMenuList = [
+const restApiExampleList = [
   {
     href: '/example/rest-api/market-code',
     text: '종목 - 마켓 코드 목록',
@@ -35,6 +35,13 @@ const exampleMenuList = [
   },
 ];
 
+const webSocketApiExampleList = [
+  {
+    href: '/example/websocket-api/order-book',
+    text: '실시간 호가 정보 조회',
+  },
+];
+
 const Header = () => (
   <Navbar className="bg-slate-800">
     <div className="flex-1">
@@ -47,12 +54,25 @@ const Header = () => (
         <Menu.Item>
           <Link href="/">거래소</Link>
         </Menu.Item>
+
+        <Menu.Item>
+          <details>
+            <summary>Web Socket API 예제</summary>
+            <ul className="p-2 bg-slate-800 w-[180px] right-0">
+              {webSocketApiExampleList.map((item, idx) => (
+                <li key={`websocket-example-menu-${idx}`}>
+                  <Link href={item.href}>{item.text}</Link>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </Menu.Item>
         <Menu.Item>
           <details>
             <summary>Rest API 예제</summary>
             <ul className="p-2 bg-slate-800 w-[180px] right-0">
-              {exampleMenuList.map((item, idx) => (
-                <li key={`example-menu-${idx}`}>
+              {restApiExampleList.map((item, idx) => (
+                <li key={`rest-api-example-menu-${idx}`}>
                   <Link href={item.href}>{item.text}</Link>
                 </li>
               ))}

@@ -4,7 +4,7 @@ import React from 'react';
 
 import ErrorBox from '@/components/ErrorBox';
 import Loading from '@/components/Loading';
-import EmptyBox from './EmptyBox';
+import EmptyBox from '@/components/EmptyBox';
 
 type Props = {
   children: React.ReactNode;
