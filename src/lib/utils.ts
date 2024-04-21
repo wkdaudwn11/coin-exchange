@@ -1,6 +1,8 @@
 /* eslint-disable no-plusplus */
 
 import type { OrderbookWS } from '@/types/orderbook';
+import type { TickerWS } from '@/types/tickers';
+import type { MarketCode } from '@/types/market-code';
 
 export const socketDataEncoder = <T>(
   socketData: ArrayBuffer,
@@ -15,7 +17,7 @@ export const socketDataEncoder = <T>(
   }
 };
 
-export const getLastBuffers = <T extends OrderbookWS>(
+export const getLastBuffers = <T extends OrderbookWS | TickerWS>(
   buffer: T[],
   maxNumResult: number,
 ) => {
@@ -43,4 +45,18 @@ export const getLastBuffers = <T extends OrderbookWS>(
     console.error(error);
     return [];
   }
+};
+
+export const sortingWidthMarketCode = (
+  tickers: TickerWS[],
+  marketCodes: MarketCode[],
+): TickerWS[] => {
+  let sortingTickers: TickerWS[] = [];
+
+  marketCodes.forEach((item) => {
+    const find = tickers.find((ticker) => ticker.code === item.market);
+    if (find) sortingTickers = sortingTickers.concat(find);
+  });
+
+  return sortingTickers;
 };

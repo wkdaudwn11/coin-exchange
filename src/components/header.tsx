@@ -40,6 +40,10 @@ const webSocketApiExampleList = [
     href: '/example/websocket-api/order-book',
     text: '실시간 호가 정보 조회',
   },
+  {
+    href: '/example/websocket-api/ticker',
+    text: '실시간 현재가 정보 조회',
+  },
 ];
 
 const Header = () => (
@@ -58,7 +62,7 @@ const Header = () => (
         <Menu.Item>
           <details>
             <summary>Web Socket API 예제</summary>
-            <ul className="p-2 bg-slate-800 w-[180px] right-0">
+            <ul className="p-2 bg-slate-800 w-[185px] right-0">
               {webSocketApiExampleList.map((item, idx) => (
                 <li key={`websocket-example-menu-${idx}`}>
                   <Link href={item.href}>{item.text}</Link>

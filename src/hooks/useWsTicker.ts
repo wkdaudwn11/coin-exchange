@@ -1,32 +1,39 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { useRef, useState, useEffect, useCallback } from 'react';
 import throttle from 'lodash/throttle';
 
-import type { OrderbookWS } from '@/types/orderbook';
+import type { MarketCode } from '@/types/market-code';
+import type { TickerWS } from '@/types/tickers';
 
-import { socketDataEncoder, getLastBuffers } from '@/lib/utils';
+import {
+  socketDataEncoder,
+  sortingWidthMarketCode,
+  getLastBuffers,
+} from '@/lib/utils';
 
 type Props = {
-  marketCode: string;
+  marketCodes: MarketCode[];
 };
 
 const SOCKET_URL = 'wss://api.upbit.com/websocket/v1';
 
-const useWsOrderbook = ({ marketCode }: Props) => {
+const useWsTicker = ({ marketCodes }: Props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
-  const [socketData, setSocketData] = useState<OrderbookWS | undefined>(
+  const [socketData, setSocketData] = useState<TickerWS[] | undefined>(
     undefined,
   );
 
   const socket = useRef<WebSocket | null>(null);
-  const buffer = useRef<OrderbookWS[]>([]);
+  const buffer = useRef<TickerWS[]>([]);
 
   const throttled = throttle(() => {
     try {
-      const lastBuffers = getLastBuffers(buffer.current, 1);
-      if (lastBuffers) setSocketData(lastBuffers[0]);
-      buffer.current = [];
+      const lastBuffers = getLastBuffers(buffer.current, marketCodes.length);
+      const sortingTickers = sortingWidthMarketCode(lastBuffers, marketCodes);
+      setSocketData(sortingTickers);
       setIsLoading(false);
     } catch (e) {
       throw new Error((e as Error).message);
@@ -34,7 +41,7 @@ const useWsOrderbook = ({ marketCode }: Props) => {
   }, 400);
 
   const connectSocket = useCallback(() => {
-    if (!marketCode) throw new Error('marketCode is missing.');
+    if (!marketCodes) throw new Error('marketCodes is missing.');
 
     if (socket.current) return;
 
@@ -46,8 +53,8 @@ const useWsOrderbook = ({ marketCode }: Props) => {
         const sendContent = [
           { ticket: 'test' },
           {
-            type: 'orderbook',
-            codes: [marketCode],
+            type: 'ticker',
+            codes: marketCodes.map((item) => item.market),
           },
         ];
         socket.current.send(JSON.stringify(sendContent));
@@ -68,7 +75,7 @@ const useWsOrderbook = ({ marketCode }: Props) => {
     };
 
     const socketMessageHandler = (evt: MessageEvent<ArrayBuffer>) => {
-      const data = socketDataEncoder<OrderbookWS>(evt.data);
+      const data = socketDataEncoder<TickerWS>(evt.data);
       if (data) buffer.current.push(data);
       throttled();
     };
@@ -77,13 +84,11 @@ const useWsOrderbook = ({ marketCode }: Props) => {
     socket.current.onopen = socketOpenHandler;
     socket.current.onerror = socketErrorHandler;
     socket.current.onmessage = socketMessageHandler;
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [marketCode]);
+  }, [marketCodes]);
 
   useEffect(() => {
     connectSocket();
-  }, [connectSocket]);
+  }, []);
 
   return {
     socket: socket.current,
@@ -96,4 +101,4 @@ const useWsOrderbook = ({ marketCode }: Props) => {
   };
 };
 
-export default useWsOrderbook;
+export default useWsTicker;

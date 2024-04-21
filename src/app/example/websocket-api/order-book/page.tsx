@@ -14,7 +14,7 @@ const OrderBookPage = () => {
   const [marketCode, setMarketCode] = useState('');
 
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ['candles-days-market-code'],
+    queryKey: ['realtime-orderbook-market-code'],
     queryFn: () => getMarketCode({ isDetails: false }),
   });
 
@@ -38,7 +38,7 @@ const OrderBookPage = () => {
         refetch={refetch}
         isEmpty={!isLoading && !error && (!data || (data && data.length === 0))}
         emptyMessage="호가 정보 내역이 없습니다."
-        title="실기간 호가 정보 조회"
+        title="실시간 호가 정보 조회"
       >
         <div className="flex flex-col gap-4">
           <div className="flex items-end gap-4">
