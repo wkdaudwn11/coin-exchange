@@ -38,11 +38,15 @@ const restApiExampleList = [
 const webSocketApiExampleList = [
   {
     href: '/example/websocket-api/order-book',
-    text: '실시간 호가 정보 조회',
+    text: '실시간 호가 정보',
   },
   {
     href: '/example/websocket-api/ticker',
-    text: '실시간 현재가 정보 조회',
+    text: '실시간 현재가 정보',
+  },
+  {
+    href: '/example/websocket-api/trade',
+    text: '실시간 체결 정보',
   },
 ];
 

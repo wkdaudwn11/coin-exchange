@@ -1,8 +1,10 @@
 /* eslint-disable no-plusplus */
+import cloneDeep from 'lodash/cloneDeep';
 
 import type { OrderbookWS } from '@/types/orderbook';
 import type { TickerWS } from '@/types/tickers';
 import type { MarketCode } from '@/types/market-code';
+import type { TradeWS } from '@/types/trades';
 
 export const socketDataEncoder = <T>(
   socketData: ArrayBuffer,
@@ -59,4 +61,16 @@ export const sortingWidthMarketCode = (
   });
 
   return sortingTickers;
+};
+
+export const updateQueueBuffer = (
+  buffer: TradeWS[],
+  maxSize: number,
+): TradeWS[] => {
+  const copyBuffer = cloneDeep(buffer);
+
+  if (copyBuffer.length >= maxSize)
+    copyBuffer.splice(0, copyBuffer.length - maxSize);
+
+  return copyBuffer;
 };

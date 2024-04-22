@@ -10,11 +10,11 @@ import DataValidation from '@/components/DataValidation';
 import Layout from '@/components/layout';
 import List from './_components/list';
 
-const OrderBookPage = () => {
+const TradePage = () => {
   const [marketCode, setMarketCode] = useState('');
 
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ['realtime-orderbook-market-code'],
+    queryKey: ['realtime-trade-market-code'],
     queryFn: () => getMarketCode({ isDetails: false }),
   });
 
@@ -37,8 +37,8 @@ const OrderBookPage = () => {
         error={error}
         refetch={refetch}
         isEmpty={!isLoading && !error && (!data || (data && data.length === 0))}
-        emptyMessage="호가 정보 내역이 없습니다."
-        title="실시간 호가 정보"
+        emptyMessage="체결 정보 내역이 없습니다."
+        title="실시간 체결 정보"
       >
         <div className="flex flex-col gap-4">
           <div className="flex items-end gap-4">
@@ -55,4 +55,4 @@ const OrderBookPage = () => {
   );
 };
 
-export default OrderBookPage;
+export default TradePage;

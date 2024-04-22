@@ -22,7 +22,7 @@ const TickerPage = () => {
         refetch={refetch}
         isEmpty={!isLoading && !error && (!data || (data && data.length === 0))}
         emptyMessage="현재가 정보 내역이 없습니다."
-        title="실시간 현재가 정보 조회"
+        title="실시간 현재가 정보"
       >
         <div className="flex flex-col gap-4">
           <List marketCodes={data || []} />
