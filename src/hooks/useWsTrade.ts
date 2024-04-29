@@ -77,7 +77,9 @@ const useWsTrade = ({ marketCode }: Props) => {
     socket.current.onopen = socketOpenHandler;
     socket.current.onerror = socketErrorHandler;
     socket.current.onmessage = socketMessageHandler;
-  }, [marketCode, throttled]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [marketCode]);
 
   useEffect(() => {
     connectSocket();
