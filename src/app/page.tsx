@@ -6,7 +6,7 @@ import Layout from '@/components/Layout';
 
 const Home = () => (
   <Layout>
-    <div className="flex gap-[10px] pt-[10px]">
+    <div className="flex gap-[10px] pt-[10px] pb-[60px]">
       <section className="flex-1 flex flex-col gap-[10px]">
         <div className="flex items-center h-[50px] px-5 bg-neutral-900">
           공지
