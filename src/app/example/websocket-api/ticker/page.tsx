@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getMarketCode } from '@/services/market-code';
 
 import DataValidation from '@/components/DataValidation';
-import Layout from '@/components/Layout2';
+import Layout from '@/components/Layout';
 import List from './_components/list';
 
 const TickerPage = () => {
