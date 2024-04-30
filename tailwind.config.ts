@@ -18,6 +18,7 @@ const config: Config = {
     },
     colors: {
       header: 'rgb(0, 53, 151)',
+      footer: 'rgb(6, 18, 33)',
     },
   },
   plugins: [require('daisyui')],

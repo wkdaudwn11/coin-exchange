@@ -3,8 +3,10 @@
 import React from 'react';
 
 const Footer = () => (
-  <footer className="text-white p-4">
-    <p>© 2024 wkdaudwn11.</p>
+  <footer className="flex justify-center w-full h-[357px] bg-footer">
+    <div className="flex items-center justify-center w-full max-w-[1400px] pt-[42px] pb-[60px] px-5">
+      <span className="text-xl font-bold">© 2024 wkdaudwn11.</span>
+    </div>
   </footer>
 );
 
