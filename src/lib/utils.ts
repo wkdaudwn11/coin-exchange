@@ -3,7 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import type { OrderbookWS } from '@/types/orderbook';
 import type { TickerWS } from '@/types/tickers';
-import type { MarketCode } from '@/types/market-code';
+import type { MarketCode } from '@/types/marketCode';
 import type { TradeWS } from '@/types/trades';
 
 export const socketDataEncoder = <T>(

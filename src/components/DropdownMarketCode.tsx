@@ -1,4 +1,4 @@
-import type { GetMarketCodeResponse } from '@/types/market-code';
+import type { GetMarketCodeResponse } from '@/types/marketCode';
 
 type Props = {
   activeValue: string;

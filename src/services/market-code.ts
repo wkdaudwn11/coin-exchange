@@ -1,7 +1,7 @@
 import type {
   GetMarketCodeRequest,
   GetMarketCodeResponse,
-} from '@/types/market-code';
+} from '@/types/marketCode';
 
 import api from './api';
 

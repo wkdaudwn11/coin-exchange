@@ -3,7 +3,8 @@
 import { usePathname } from 'next/navigation';
 import c from 'classnames';
 
-import Header from './header';
+import Header from './Header';
+import Footer from './Footer';
 
 type Props = {
   children: React.ReactNode;
@@ -25,9 +26,7 @@ const Layout = ({ children }: Props) => {
       >
         {children}
       </main>
-      <footer className="text-white p-4">
-        <p>© 2024 wkdaudwn11.</p>
-      </footer>
+      <Footer />
     </div>
   );
 };

@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import throttle from 'lodash/throttle';
 
-import type { MarketCode } from '@/types/market-code';
+import type { MarketCode } from '@/types/marketCode';
 import type { TickerWS } from '@/types/tickers';
 
 import {

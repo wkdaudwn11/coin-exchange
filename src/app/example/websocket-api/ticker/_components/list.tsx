@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-daisyui';
 
-import type { MarketCode } from '@/types/market-code';
+import type { MarketCode } from '@/types/marketCode';
 
 import useWsTicker from '@/hooks/useWsTicker';
 
