@@ -7,7 +7,7 @@ import { getMarketCode } from '@/services/market-code';
 
 import DropdownMarketCode from '@/components/DropdownMarketCode';
 import DataValidation from '@/components/DataValidation';
-import Layout from '@/components/Layout';
+import Layout from '@/components/Layout2';
 import List from './_components/list';
 
 const TradePage = () => {

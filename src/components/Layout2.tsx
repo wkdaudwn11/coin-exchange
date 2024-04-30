@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import c from 'classnames';
 
-import Header from './Header';
+import Header from './Header2';
 import Footer from './Footer';
 
 type Props = {

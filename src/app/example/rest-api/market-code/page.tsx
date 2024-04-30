@@ -6,7 +6,7 @@ import { Checkbox, Form } from 'react-daisyui';
 
 import { getMarketCode } from '@/services/market-code';
 
-import Layout from '@/components/Layout';
+import Layout from '@/components/Layout2';
 import DataValidation from '@/components/DataValidation';
 import Table from '@/components/Table';
 
