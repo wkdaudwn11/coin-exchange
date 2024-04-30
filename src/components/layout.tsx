@@ -16,12 +16,12 @@ const Layout = ({ children }: Props) => {
     <div className="flex flex-col items-center min-h-screen">
       <Header />
       <main
-        className={c(
-          'flex items-center justify-center flex-1 w-full max-w-[1400px]',
-          {
-            'pt-10': pathName !== '/',
-          },
-        )}
+        className={c('flex-1 w-full max-w-[1400px]', {
+          flex: pathName !== '/',
+          'items-center': pathName !== '/',
+          'justify-center': pathName !== '/',
+          'pt-10': pathName !== '/',
+        })}
       >
         {children}
       </main>
