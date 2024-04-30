@@ -1,8 +1,9 @@
 'use client';
 
-import React from 'react';
 import Link from 'next/link';
-import { Button, Menu, Navbar } from 'react-daisyui';
+import { usePathname } from 'next/navigation';
+import { Button, Menu } from 'react-daisyui';
+import c from 'classnames';
 
 const restApiExampleList = [
   {
@@ -50,46 +51,87 @@ const webSocketApiExampleList = [
   },
 ];
 
-const Header = () => (
-  <Navbar className="bg-slate-800">
-    <div className="flex-1">
-      <Button tag="a" color="ghost" className="normal-case text-xl">
-        Coin Exchange
-      </Button>
-    </div>
-    <div className="flex-none">
-      <Menu horizontal className="px-1">
-        <Menu.Item>
-          <Link href="/">거래소</Link>
-        </Menu.Item>
+const Header = () => {
+  const pathName = usePathname();
 
-        <Menu.Item>
-          <details>
-            <summary>Web Socket API 예제</summary>
-            <ul className="p-2 bg-slate-800 w-[185px] right-0">
-              {webSocketApiExampleList.map((item, idx) => (
-                <li key={`websocket-example-menu-${idx}`}>
-                  <Link href={item.href}>{item.text}</Link>
-                </li>
-              ))}
-            </ul>
-          </details>
-        </Menu.Item>
-        <Menu.Item>
-          <details>
-            <summary>Rest API 예제</summary>
-            <ul className="p-2 bg-slate-800 w-[180px] right-0">
-              {restApiExampleList.map((item, idx) => (
-                <li key={`rest-api-example-menu-${idx}`}>
-                  <Link href={item.href}>{item.text}</Link>
-                </li>
-              ))}
-            </ul>
-          </details>
-        </Menu.Item>
-      </Menu>
-    </div>
-  </Navbar>
-);
+  return (
+    <header className="flex justify-center w-screen h-[60px] bg-header">
+      <div className="flex items-center w-full h-full max-w-[1400px]">
+        <Button tag="a" color="ghost" className="normal-case text-xl">
+          Coin Exchange
+        </Button>
+        <div className="flex-none">
+          <Menu horizontal className="px-1 text-neutral-400">
+            <Menu.Item
+              className={c('', {
+                'text-neutral-50': pathName === '/',
+                'font-bold': pathName === '/',
+              })}
+            >
+              <Link href="/">거래소</Link>
+            </Menu.Item>
+
+            <Menu.Item className="z-[1]">
+              <details>
+                <summary
+                  className={c('', {
+                    'text-neutral-50': pathName.includes(
+                      '/example/websocket-api/',
+                    ),
+                    'font-bold': pathName.includes('/example/websocket-api/'),
+                  })}
+                >
+                  Web Socket API 예제
+                </summary>
+                <ul className="p-2 bg-header w-[185px] right-0">
+                  {webSocketApiExampleList.map((item, idx) => (
+                    <li key={`websocket-example-menu-${idx}`}>
+                      <Link
+                        href={item.href}
+                        className={c('', {
+                          'text-neutral-50': pathName === item.href,
+                          'font-bold': pathName === item.href,
+                        })}
+                      >
+                        {item.text}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </Menu.Item>
+            <Menu.Item className="z-[1]">
+              <details>
+                <summary
+                  className={c('', {
+                    'text-neutral-50': pathName.includes('/example/rest-api/'),
+                    'font-bold': pathName.includes('/example/rest-api/'),
+                  })}
+                >
+                  Rest API 예제
+                </summary>
+                <ul className="p-2 bg-header w-[180px] right-0">
+                  {restApiExampleList.map((item, idx) => (
+                    <li key={`rest-api-example-menu-${idx}`}>
+                      <Link
+                        href={item.href}
+                        className={c('', {
+                          'text-neutral-50': pathName === item.href,
+                          'font-bold': pathName === item.href,
+                        })}
+                      >
+                        {item.text}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </Menu.Item>
+          </Menu>
+        </div>
+      </div>
+    </header>
+  );
+};
 
 export default Header;
