@@ -15,12 +15,18 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
-    },
-    colors: {
-      header: 'rgb(0, 53, 151)',
-      footer: 'rgb(6, 18, 33)',
+      colors: {
+        header: 'rgb(0, 53, 151)',
+        'primary-100': 'rgb(6, 18, 33)',
+        'warning-100': 'rgb(255, 168, 0)',
+        'gray-100': 'rgb(190, 193, 198)',
+      },
+      fontSize: {
+        '15': '15px',
+      },
     },
   },
   plugins: [require('daisyui')],
 };
+
 export default config;
