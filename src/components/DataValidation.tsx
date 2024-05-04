@@ -3,8 +3,8 @@
 import React from 'react';
 
 import ErrorBox from '@/components/ErrorBox';
-import Loading from '@/components/Loading';
 import EmptyBox from '@/components/EmptyBox';
+import Loading from '@/components/Loading';
 
 type Props = {
   children: React.ReactNode;
