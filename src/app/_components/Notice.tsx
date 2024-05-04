@@ -3,7 +3,7 @@
 import { ExclamationCircleIcon, XMarkIcon } from '@heroicons/react/24/solid';
 
 const Notice = () => (
-  <div className="flex w-full gap-[10px]">
+  <div className="flex items-center w-full h-[50px] gap-[10px] px-5 bg-primary-100">
     <div className="flex items-center gap-1">
       <ExclamationCircleIcon className="w-[22px] h-[22px] text-warning-100" />
       <span className="text-15 font-bold text-warning-100">공지</span>
