@@ -74,3 +74,9 @@ export const updateQueueBuffer = (
 
   return copyBuffer;
 };
+
+export const convertMillion = (value: number) => {
+  const MILLION = 1000000;
+  const extractedValue = value / MILLION;
+  return extractedValue;
+};

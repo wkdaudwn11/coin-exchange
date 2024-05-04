@@ -1,75 +1,56 @@
 'use client';
 
-import React from 'react';
+import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { getMarketCode } from '@/services/market-code';
+import useActiveMarketCode from '@/store/useActiveMarketCode';
 
-import ErrorBox from '@/components/ErrorBox';
-import EmptyBox from '@/components/EmptyBox';
-import Loading from '@/components/Loading';
+import DataValidationV2 from '@/components/DataValidationV2';
 import Layout from '@/components/Layout';
 
 import Notice from './_components/Notice';
 import Search from './_components/Search';
 import MarketCodeList from './_components/MarketCodeList';
 
-const LoadingBox = ({ children }: { children: React.ReactNode }) => (
-  <Layout>
-    <div className="flex flex-col items-center justify-center gap-4 w-full h-[100vh]">
-      {children}
-    </div>
-  </Layout>
-);
-
 const Home = () => {
-  const { data, isLoading, error, refetch } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ['coin-exchange-market-code'],
     queryFn: () => getMarketCode({ isDetails: false }),
   });
 
-  if (isLoading)
-    return (
-      <LoadingBox>
-        <Loading />
-      </LoadingBox>
-    );
+  const { setMarketCode } = useActiveMarketCode();
 
-  if (!isLoading && error)
-    return (
-      <LoadingBox>
-        <ErrorBox
-          errorName={error.name}
-          errorMessage={error.message}
-          refetch={refetch}
-        />
-      </LoadingBox>
-    );
+  useEffect(() => {
+    if (!data) return;
+    const bitcoin = data.find((item) => item.market === 'KRW-BTC');
 
-  if (!isLoading && !error && (!data || (data && data.length === 0)))
-    return (
-      <LoadingBox>
-        <EmptyBox message="데이터가 없습니다." refetch={refetch} />
-      </LoadingBox>
-    );
+    if (bitcoin) setMarketCode(bitcoin);
+  }, [data, setMarketCode]);
 
   return (
     <Layout>
-      <div className="flex gap-[10px] pt-[10px] pb-[60px]">
-        <section className="flex-1 flex flex-col gap-[10px]">
-          <Notice />
-          <article className="h-[618px] bg-primary-100">header</article>
-          <div className="flex gap-[10px] h-[800px]">
-            <div className="flex-1 h-full bg-primary-100">body left</div>
-            <div className="flex-1 h-full bg-primary-100">body right</div>
-          </div>
-          <article className="h-[435px] bg-primary-100">footer</article>
-        </section>
-        <section className="w-[400px] bg-primary-100">
-          <Search />
-          <MarketCodeList marketCodes={data || []} />
-        </section>
-      </div>
+      <DataValidationV2
+        isLoading={isLoading}
+        error={error}
+        isEmpty={!isLoading && !error && (!data || (data && data.length === 0))}
+      >
+        <div className="relative flex gap-[10px] pt-[10px] pb-[60px]">
+          <section className="flex-1 flex flex-col gap-[10px]">
+            <Notice />
+            <article className="h-[618px] bg-primary-100">header</article>
+            <div className="flex gap-[10px] h-[800px]">
+              <div className="flex-1 h-full bg-primary-100">body left</div>
+              <div className="flex-1 h-full bg-primary-100">body right</div>
+            </div>
+            <article className="h-[435px] bg-primary-100">footer</article>
+          </section>
+          <section className="w-[400px] max-h-[1208px] overflow-x-hidden overflow-y-auto bg-primary-100">
+            <Search />
+            <MarketCodeList marketCodes={data || []} />
+          </section>
+        </div>
+      </DataValidationV2>
     </Layout>
   );
 };
