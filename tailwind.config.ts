@@ -20,6 +20,8 @@ const config: Config = {
         'primary-100': 'rgb(6, 18, 33)',
         'warning-100': 'rgb(255, 168, 0)',
         'gray-100': 'rgb(190, 193, 198)',
+        up: '#c84a31',
+        down: '#1261c4',
       },
       fontSize: {
         '15': '15px',

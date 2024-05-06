@@ -8,7 +8,7 @@ import type { TickerWS } from '@/types/tickers';
 
 import {
   socketDataEncoder,
-  sortingWidthMarketCode,
+  sortingWithMarketCode,
   getLastBuffers,
 } from '@/lib/utils';
 
@@ -32,7 +32,7 @@ const useWsTicker = ({ marketCodes }: Props) => {
   const throttled = throttle(() => {
     try {
       const lastBuffers = getLastBuffers(buffer.current, marketCodes.length);
-      const sortingTickers = sortingWidthMarketCode(lastBuffers, marketCodes);
+      const sortingTickers = sortingWithMarketCode(lastBuffers, marketCodes);
       setSocketData(sortingTickers);
       setIsLoading(false);
     } catch (e) {

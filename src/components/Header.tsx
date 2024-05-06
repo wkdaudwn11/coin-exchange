@@ -56,7 +56,7 @@ const Header = () => {
 
   return (
     <header className="flex justify-center w-full h-[60px] bg-header">
-      <div className="flex items-center w-full h-full max-w-[1400px]">
+      <div className="flex items-center w-[1400px] h-full">
         <Button tag="a" color="ghost" className="normal-case text-xl">
           Coin Exchange
         </Button>

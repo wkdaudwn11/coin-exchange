@@ -45,7 +45,7 @@ const Home = () => {
             </div>
             <article className="h-[435px] bg-primary-100">footer</article>
           </section>
-          <section className="w-[400px] max-h-[1208px] overflow-x-hidden overflow-y-auto bg-primary-100">
+          <section className="w-[400px] max-h-[1208px] overflow-x-hidden overflow-y-auto bg-primary-100 hide-scrollbar">
             <Search />
             <MarketCodeList marketCodes={data || []} />
           </section>

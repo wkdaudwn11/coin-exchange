@@ -49,7 +49,7 @@ export const getLastBuffers = <T extends OrderbookWS | TickerWS>(
   }
 };
 
-export const sortingWidthMarketCode = (
+export const sortingWithMarketCode = (
   tickers: TickerWS[],
   marketCodes: MarketCode[],
 ): TickerWS[] => {
@@ -60,7 +60,9 @@ export const sortingWidthMarketCode = (
     if (find) sortingTickers = sortingTickers.concat(find);
   });
 
-  return sortingTickers;
+  return sortingTickers.sort(
+    (a, b) => b.acc_trade_price_24h - a.acc_trade_price_24h,
+  );
 };
 
 export const updateQueueBuffer = (
