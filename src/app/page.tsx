@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { getMarketCode } from '@/services/market-code';
-import useActiveMarketCode from '@/store/useActiveMarketCode';
+import useActiveMarketCode from '@/store/useActiveMarket';
 
 import DataValidationV2 from '@/components/DataValidationV2';
 import Layout from '@/components/Layout';
@@ -12,6 +12,7 @@ import Layout from '@/components/Layout';
 import Notice from './_components/Notice';
 import Search from './_components/Search';
 import MarketCodeList from './_components/MarketCodeList';
+import MarketInfo from './_components/MarketInfo';
 
 const Home = () => {
   const { data, isLoading, error } = useQuery({
@@ -19,14 +20,14 @@ const Home = () => {
     queryFn: () => getMarketCode({ isDetails: false }),
   });
 
-  const { setMarketCode } = useActiveMarketCode();
+  const { setActiveMarketCode } = useActiveMarketCode();
 
   useEffect(() => {
     if (!data) return;
     const bitcoin = data.find((item) => item.market === 'KRW-BTC');
 
-    if (bitcoin) setMarketCode(bitcoin);
-  }, [data, setMarketCode]);
+    if (bitcoin) setActiveMarketCode(bitcoin);
+  }, [data, setActiveMarketCode]);
 
   return (
     <Layout>
@@ -38,7 +39,9 @@ const Home = () => {
         <div className="relative flex gap-[10px] pt-[10px] pb-[60px]">
           <section className="flex-1 flex flex-col gap-[10px]">
             <Notice />
-            <article className="h-[618px] bg-primary-100">header</article>
+            <article className="h-[618px] bg-primary-100">
+              <MarketInfo />
+            </article>
             <div className="flex gap-[10px] h-[800px]">
               <div className="flex-1 h-full bg-primary-100">body left</div>
               <div className="flex-1 h-full bg-primary-100">body right</div>

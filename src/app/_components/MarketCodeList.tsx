@@ -1,13 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Table } from 'react-daisyui';
 import c from 'classnames';
 
 import type { MarketCode } from '@/types/marketCode';
 
 import useWsTicker from '@/hooks/useWsTicker';
-import useActiveMarketCode from '@/store/useActiveMarketCode';
+import useActiveMarketCode from '@/store/useActiveMarket';
 import { convertMillion } from '@/lib/utils';
 
 import DataValidationV2 from '@/components/DataValidationV2';
@@ -21,14 +21,24 @@ const MarketCodeList = ({ marketCodes }: Props) => {
     marketCodes: marketCodes.filter((item) => item.market.includes('KRW')),
   });
 
-  const { activeMarketCode, setMarketCode } = useActiveMarketCode();
+  const { activeMarketCode, setActiveMarketCode, setActiveMarketInfo } =
+    useActiveMarketCode();
 
   const handleMarketClick = (code: string) => () => {
     if (activeMarketCode.market === code) return;
 
     const findMarket = marketCodes.find((item) => item.market === code);
-    if (findMarket) setMarketCode(findMarket);
+    if (findMarket) setActiveMarketCode(findMarket);
   };
+
+  useEffect(() => {
+    if (!socketData) return;
+
+    const activeMarketInfo = socketData.find(
+      (item) => item.code === activeMarketCode.market,
+    );
+    if (activeMarketInfo) setActiveMarketInfo(activeMarketInfo);
+  }, [socketData, activeMarketCode, setActiveMarketInfo]);
 
   return (
     <DataValidationV2
@@ -70,7 +80,7 @@ const MarketCodeList = ({ marketCodes }: Props) => {
                   </div>
                   <div className="width-[95px] text-right">
                     <p
-                      className={c('text-white', {
+                      className={c({
                         'text-up': upDown === 'up',
                         'text-down': upDown === 'down',
                       })}
@@ -82,22 +92,28 @@ const MarketCodeList = ({ marketCodes }: Props) => {
                   </div>
                   <div className="w-[50px] text-right">
                     <p
-                      className={c('text-white', {
+                      className={c({
                         'text-up': upDown === 'up',
                         'text-down': upDown === 'down',
                       })}
                     >
-                      {item.signed_change_rate.toLocaleString(undefined, {
-                        maximumFractionDigits: 4,
-                      })}
+                      {(item.signed_change_rate * 100).toLocaleString(
+                        undefined,
+                        {
+                          maximumFractionDigits: 2,
+                        },
+                      )}
+                      %
                     </p>
                     <p
-                      className={c('text-white text-[11px]', {
+                      className={c('text-[11px]', {
                         'text-up': upDown === 'up',
                         'text-down': upDown === 'down',
                       })}
                     >
-                      {item.signed_change_price.toLocaleString('ko-KR')}
+                      {item.signed_change_price > 1000
+                        ? item.signed_change_price.toLocaleString('ko-KR')
+                        : item.signed_change_price}
                     </p>
                   </div>
                   <div className="text-right w-[70px]">
@@ -106,7 +122,7 @@ const MarketCodeList = ({ marketCodes }: Props) => {
                         convertMillion(item.acc_trade_price_24h),
                       ).toLocaleString('ko-KR')}
                     </span>
-                    <span className="text-[#565d6a]">백만</span>
+                    <span className="text-gray-400">백만</span>
                   </div>
                 </Table.Row>
               );

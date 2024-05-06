@@ -1,3 +1,3 @@
-import useActiveMarketCode from './useActiveMarketCode';
+import useActiveMarketCode from './useActiveMarket';
 
 export { useActiveMarketCode };
