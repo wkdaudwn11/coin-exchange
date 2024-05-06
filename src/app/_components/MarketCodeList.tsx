@@ -46,7 +46,7 @@ const MarketCodeList = ({ marketCodes }: Props) => {
       error={error}
     >
       <Table>
-        <Table.Head className="sticky top-0 z-10 bg-[#141a24] text-center text-[11px] text-[#858b95]">
+        <Table.Head className="sticky top-[42px] z-10 bg-[#141a24] text-center text-[11px] text-[#858b95]">
           <span>한글명</span>
           <span>현재가</span>
           <span>전일대비</span>
