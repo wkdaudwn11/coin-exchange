@@ -13,6 +13,7 @@ import Notice from './_components/Notice';
 import Search from './_components/Search';
 import MarketCodeList from './_components/MarketCodeList';
 import MarketInfo from './_components/MarketInfo';
+import RealTimeChart from './_components/RealTimeChart';
 
 const Home = () => {
   const { data, isLoading, error } = useQuery({
@@ -39,8 +40,9 @@ const Home = () => {
         <div className="relative flex gap-[10px] pt-[10px] pb-[60px]">
           <section className="flex-1 flex flex-col gap-[10px]">
             <Notice />
-            <article className="h-[618px] bg-primary-100">
+            <article className="flex flex-col h-[618px] bg-primary-100">
               <MarketInfo />
+              <RealTimeChart />
             </article>
             <div className="flex gap-[10px] h-[800px]">
               <div className="flex-1 h-full bg-primary-100">body left</div>
